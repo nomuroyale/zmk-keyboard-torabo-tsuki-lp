@@ -62,4 +62,9 @@
         };
     };
 };
-
+&pointing_listener {
+    scroller {
+        layers = <3>; // Layer 1 にいる時だけ、ボールの動きを「スクロール」に変換
+        input-processors = <&zip_xy_to_scroll_mapper>;
+    };
+};

@@ -14,6 +14,14 @@
             layers = <2>;
         };
     };
+    behaviors {
+        encoder_msc_down_up: encoder_msc_down_up {
+        compatible = "zmk,behavior-sensor-rotate";
+        label = "ENCODER_MSC_DOWN_UP";
+        #sensor-binding-cells = <0>;
+        bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+        tap-ms = <20>;
+    };
 
     keymap {
         compatible = "zmk,keymap";
@@ -56,6 +64,7 @@
 &trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
 &trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
             >;
+            sensor-bindings = <&encoder_msc_down_up>;
         };
     };
 };

@@ -11,7 +11,7 @@
 
         bt_clear {
             bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
+            key-positions = <16 17>;
             layers = <2>;
         };
     };
@@ -61,7 +61,7 @@
 };
 &pointing_listener {
     scroller {
-        layers = <3>; // Layer 1 にいる時だけ、ボールの動きを「スクロール」に変換
+        layers = <3>; // Layer 3 にいる時だけ、ボールの動きを「スクロール」に変換
         input-processors = <&zip_xy_to_scroll_mapper &zip_scroll_transform 2>; // ★「2」で上下反転
     };
 };

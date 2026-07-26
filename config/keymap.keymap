@@ -48,7 +48,7 @@
 
         layer_1 {
             bindings = <
-                &kp TAB  &trans  &mkp MCLK  &trans     &trans                  &trans  &trans     &trans     &trans  &trans
+                &kp TAB  &trans  &trans     &trans     &trans                  &trans  &trans     &mkp MCLK  &trans  &trans
                 &kp LC(A)  &kp LC(S)  &mkp RCLK  &mkp LCLK  &trans                  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans
                 &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans
                 &trans  &trans  &trans     &trans     &trans  &trans  &trans  &kp TAB &trans     &trans     &trans  &trans
@@ -83,4 +83,3 @@
         };
     };
 };
-

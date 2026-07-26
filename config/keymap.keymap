@@ -31,6 +31,12 @@
             key-positions = <11 12>;
             layers = <0 4>;
         };
+
+        ui_wheelclick {
+            bindings = <&mkp MCLK>;
+            key-positions = <6 7>;
+            layers = <0>;
+        };
     };
 
     keymap {
@@ -48,7 +54,7 @@
 
         layer_1 {
             bindings = <
-                &kp TAB  &trans  &trans     &trans     &trans                  &trans  &trans     &mkp MCLK  &trans  &trans
+                &kp TAB  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans
                 &kp LC(A)  &kp LC(S)  &mkp RCLK  &mkp LCLK  &trans                  &trans  &mkp LCLK  &mkp RCLK  &trans  &trans
                 &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &trans  &trans  &trans  &trans  &trans     &trans     &trans  &trans
                 &trans  &trans  &trans     &trans     &trans  &trans  &trans  &kp TAB &trans     &trans     &trans  &trans
@@ -83,3 +89,4 @@
         };
     };
 };
+

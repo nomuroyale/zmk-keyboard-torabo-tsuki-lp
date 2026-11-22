@@ -1,4 +1,7 @@
-"""Generate keymap.svg for torabo-tsuki LP (S/XS physical layout)."""
+"""Generate keymap SVG for torabo-tsuki LP (S/XS physical layout).
+
+Usage: python gen_keymap_svg.py OUT.svg [COLS]   (COLS=2 -> 2x2 landscape)
+"""
 import sys
 from html import escape
 
@@ -72,12 +75,17 @@ C = {
 }
 
 
-def key_svg(i, label, oy):
+RIGHT_HALF = set(range(5, 10)) | set(range(15, 20)) | set(range(26, 32)) | set(range(38, 44))
+
+
+def key_svg(i, label, oy, ox=0, gap_cut=0):
     p = POS[i]
-    x, y = p[0] * S + 20, p[1] * S + oy
+    if i in RIGHT_HALF:
+        ox -= gap_cut * S
+    x, y = p[0] * S + 20 + ox, p[1] * S + oy
     tf = ""
     if len(p) == 5:
-        tf = f' transform="rotate({p[2]} {p[3] * S + 20:.1f} {p[4] * S + oy:.1f})"'
+        tf = f' transform="rotate({p[2]} {p[3] * S + 20 + ox:.1f} {p[4] * S + oy:.1f})"'
     tap, hold = (label if isinstance(label, tuple) else (label, ""))
     fill, stroke, color = C["key"], C["stroke"], C["text"]
     if tap.startswith("#HELD#"):
@@ -107,31 +115,40 @@ def key_svg(i, label, oy):
     return "\n".join(out)
 
 
-def main(path):
-    total_h = 70 + LAYER_H * len(LAYERS) + 40 + 22 * len(COMBOS) + 30
-    o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{total_h}" '
-         f'viewBox="0 0 {W} {total_h}" font-family="{FONT}">',
+def main(path, cols=1):
+    # grid mode: pull the right half closer and add vertical room to approach a 3:2 tablet screen
+    gap_cut = 120 if cols > 1 else 0
+    lh = 400 if cols > 1 else LAYER_H
+    lw = W - int(gap_cut * S)
+    cfs, cstep = (15, 26) if cols > 1 else (13, 22)
+    rows = -(-len(LAYERS) // cols)
+    tw = lw * cols
+    combo_rows = -(-len(COMBOS) // cols)
+    total_h = 70 + lh * rows + 40 + cstep * combo_rows + 30
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{tw}" height="{total_h}" '
+         f'viewBox="0 0 {tw} {total_h}" font-family="{FONT}">',
          f'<rect width="100%" height="100%" fill="{C["bg"]}"/>',
          f'<text x="20" y="34" font-size="22" font-weight="bold" fill="{C["title"]}">torabo-tsuki LP XS キーマップ</text>',
-         f'<rect x="{W - 300}" y="18" width="18" height="18" rx="4" fill="{C["new"]}" stroke="{C["newstroke"]}"/>',
-         f'<text x="{W - 276}" y="32" font-size="13" fill="{C["text"]}">Pad向けに追加</text>',
-         f'<rect x="{W - 170}" y="18" width="18" height="18" rx="4" fill="{C["held"]}"/>',
-         f'<text x="{W - 146}" y="32" font-size="13" fill="{C["text"]}">押さえるキー</text>']
-    oy = 70
-    for title, note, keys in LAYERS:
-        o.append(f'<text x="20" y="{oy + 4}" font-size="16" font-weight="bold" fill="{C["title"]}">{escape(title)}</text>')
+         f'<rect x="{tw - 300}" y="18" width="18" height="18" rx="4" fill="{C["new"]}" stroke="{C["newstroke"]}"/>',
+         f'<text x="{tw - 276}" y="32" font-size="13" fill="{C["text"]}">Pad向けに追加</text>',
+         f'<rect x="{tw - 170}" y="18" width="18" height="18" rx="4" fill="{C["held"]}"/>',
+         f'<text x="{tw - 146}" y="32" font-size="13" fill="{C["text"]}">押さえるキー</text>']
+    for n, (title, note, keys) in enumerate(LAYERS):
+        ox, oy = (n % cols) * lw, 70 + (n // cols) * lh
+        o.append(f'<text x="{ox + 20}" y="{oy + 4}" font-size="16" font-weight="bold" fill="{C["title"]}">{escape(title)}</text>')
         if note:
-            o.append(f'<text x="{W - 20}" y="{oy + 4}" font-size="13" fill="{C["hold"]}" text-anchor="end">{escape(note)}</text>')
+            o.append(f'<text x="{ox + lw - 20}" y="{oy + 4}" font-size="13" fill="{C["hold"]}" text-anchor="end">{escape(note)}</text>')
         for i, label in enumerate(keys):
-            o.append(key_svg(i, label, oy + 18))
-        oy += LAYER_H
+            o.append(key_svg(i, label, oy + 18, ox, gap_cut))
+    oy = 70 + rows * lh
     o.append(f'<text x="20" y="{oy + 4}" font-size="16" font-weight="bold" fill="{C["title"]}">コンボ</text>')
     for n, c in enumerate(COMBOS):
-        o.append(f'<text x="30" y="{oy + 30 + n * 22}" font-size="13" fill="{C["text"]}">・{escape(c)}</text>')
+        cx, cy = 30 + (n // combo_rows) * lw, oy + 30 + (n % combo_rows) * cstep
+        o.append(f'<text x="{cx}" y="{cy}" font-size="{cfs}" fill="{C["text"]}">・{escape(c)}</text>')
     o.append("</svg>")
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(o))
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 1)

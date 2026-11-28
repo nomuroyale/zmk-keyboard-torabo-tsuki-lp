@@ -310,16 +310,16 @@
 <text x="640.0" y="588.5" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central"></text>
 </g>
 <g>
-<rect x="674.0" y="553.1" width="56.0" height="56.0" rx="7" fill="#fafafa" stroke="#c9ccd1" stroke-width="1.2"/>
-<text x="702.0" y="581.1" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central"></text>
+<rect x="674.0" y="553.1" width="56.0" height="56.0" rx="7" fill="#f3f4f6" stroke="#c9ccd1" stroke-width="1.2"/>
+<text x="702.0" y="581.1" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central">!</text>
 </g>
 <g>
-<rect x="736.0" y="545.0" width="56.0" height="56.0" rx="7" fill="#fafafa" stroke="#c9ccd1" stroke-width="1.2"/>
-<text x="764.0" y="573.0" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central"></text>
+<rect x="736.0" y="545.0" width="56.0" height="56.0" rx="7" fill="#f3f4f6" stroke="#c9ccd1" stroke-width="1.2"/>
+<text x="764.0" y="573.0" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central">?</text>
 </g>
 <g>
-<rect x="798.0" y="560.5" width="56.0" height="56.0" rx="7" fill="#fafafa" stroke="#c9ccd1" stroke-width="1.2"/>
-<text x="826.0" y="588.5" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central"></text>
+<rect x="798.0" y="560.5" width="56.0" height="56.0" rx="7" fill="#f3f4f6" stroke="#c9ccd1" stroke-width="1.2"/>
+<text x="826.0" y="588.5" font-size="15" fill="#1f2328" text-anchor="middle" dominant-baseline="central">~</text>
 </g>
 <g>
 <rect x="860.0" y="582.2" width="56.0" height="56.0" rx="7" fill="#fafafa" stroke="#c9ccd1" stroke-width="1.2"/>

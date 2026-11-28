@@ -56,7 +56,7 @@
             bindings = <
                 &kp TAB  &trans  &trans     &trans     &trans                  &kp LG(H)  &kp LA(TAB)  &kp LG(TAB)  &kp LG(N)  &trans
                 &kp LC(A)  &kp LC(S)  &mkp RCLK  &mkp LCLK  &trans                  &mkp MB4   &mkp LCLK    &mkp RCLK    &mkp MB5   &trans
-                &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &trans  &trans  &trans  &trans  &kp EXCL   &kp QMARK  &kp TILDE  &trans
+                &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &trans  &trans  &trans  &trans  &kp EXCL   &kp QMARK  &kp LS(EQUAL)  &trans
                 &trans  &trans  &trans     &trans     &trans  &trans  &trans  &kp TAB &trans     &trans     &trans  &trans
             >;
         };
